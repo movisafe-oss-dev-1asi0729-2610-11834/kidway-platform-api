@@ -1,0 +1,29 @@
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: kidway-platform-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: kidway_platform
+      MYSQL_ROOT_PASSWORD: admin
+    ports:
+      - "3306:3306"
+    volumes:
+      - kidway_mysql_data:/var/lib/mysql
+
+  api:
+    build: .
+    container_name: kidway-platform-api
+    restart: unless-stopped
+    depends_on:
+      - mysql
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: mysql
+      DB_URL: jdbc:mysql://mysql:3306/kidway_platform?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true
+      DB_USERNAME: root
+      DB_PASSWORD: admin
+
+volumes:
+  kidway_mysql_data:
