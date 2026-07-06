@@ -26,8 +26,7 @@ public class JsonResource {
     @Column(name = "container_type", nullable = false, length = 20)
     private String containerType;
 
-    @Lob
-    @Column(name = "payload", nullable = false)
+    @Column(name = "payload", nullable = false, columnDefinition = "TEXT")
     private String payload;
 
     @Column(name = "created_at", nullable = false)
