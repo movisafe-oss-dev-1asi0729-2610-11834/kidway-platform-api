@@ -1,9 +1,0 @@
-services:
-  - type: web
-    name: kidway-platform-api
-    env: docker
-    plan: free
-    healthCheckPath: /api/v1/health
-    envVars:
-      - key: SPRING_PROFILES_ACTIVE
-        value: default
